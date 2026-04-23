@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Migration Application</title>
+</head>
+<body>
+
+<h2>Submit Your Info</h2>
+
+<form id="playerForm">
+  <input type="text" name="name" placeholder="InGame Name" required><br><br>
+  <input type="number" name="power" placeholder="Power" required><br><br>
+
+<input type="text" name="era" placeholder="ERA" required>
+
+  <button type="submit">Apply</button>
+</form>
+
+<script>
+document.getElementById("playerForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const data = new FormData(this);
+
+  const message = `
+New Submission:
+InGame Name: ${data.get("name")}
+Power: ${data.get("power")}
+ERA: ${data.get("era")}
+  `;
+
+  await fetch("https://discord.com/api/webhooks/1496863641067196456/FN4Os_2HR_nvOijzJGsDa6sINQ96B70fLAcXmxSo8dIIAalCKoBLbjuAN4be8xnjStvy", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ content: message })
+  });
+
+  alert("Submitted!");
+});
+</script>
+
+</body>
+</html>

@@ -27,18 +27,12 @@ document.getElementById("playerForm").addEventListener("submit", async function(
 
   const data = new FormData(this);
 
-  const message =
-"New Submission:\n" +
-"InGame Name: " + data.get("name") + "\n" +
-"Power: " + data.get("power") + "\n" +
-"ERA: " + data.get("era") + "\n" +
-"Merit: " + data.get("merit") + "\n" +
-"Reason: " + data.get("reason");
-New Submission:
+const message = `New Submission:
 InGame Name: ${data.get("name")}
 Power: ${data.get("power")}
 ERA: ${data.get("era")}
 Merit: ${data.get("merit")}
+Reason: ${data.get("reason")}`;
   `;
 
   await fetch("https://discord.com/api/webhooks/1497176070208749729/jSfib8yu1D_k_C-73kWOP4NmOeA_d0IocqUBA1cTMHbSLBNSOh5zvXglM2PZyjMpE0DA", {

@@ -27,12 +27,20 @@ document.getElementById("playerForm").addEventListener("submit", async function(
 
   const data = new FormData(this);
 
-const message = `New Submission:
-InGame Name: ${data.get("name")}
-Power: ${data.get("power")}
-ERA: ${data.get("era")}
-Merit: ${data.get("merit")}
-Reason: ${data.get("reason")}`;
+const res = await fetch("YOUR_WEBHOOK_URL", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ content: message })
+});
+
+if (!res.ok) {
+  const text = await res.text();
+  console.log("Discord error:", text);
+  alert("Failed to send");
+  return;
+}
+
+alert("Submitted!");
   
   await fetch("https://discord.com/api/webhooks/1497176070208749729/jSfib8yu1D_k_C-73kWOP4NmOeA_d0IocqUBA1cTMHbSLBNSOh5zvXglM2PZyjMpE0DA", {
     method: "POST",

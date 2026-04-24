@@ -35,7 +35,7 @@ ERA: ${data.get("era")}
 Merit: ${data.get("merit")}
   `;
 
-  await fetch("YOUR_DISCORD_WEBHOOK_URL", {
+  await fetch("https://discord.com/api/webhooks/1497176070208749729/jSfib8yu1D_k_C-73kWOP4NmOeA_d0IocqUBA1cTMHbSLBNSOh5zvXglM2PZyjMpE0DA", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ content: message })

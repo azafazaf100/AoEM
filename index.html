@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Migration Application</title>
+  <title>Submit Player</title>
 </head>
 <body>
 
-<h2>Submit Your Info</h2>
+<h2>Submit Your Information</h2>
+
+<!-- Image on top -->
+<img src="C:\Users\APZA\OneDrive - H. Lundbeck A S\Documents\Private\paixnidi\E42 v3 small.png" alt="Banner" style="display:block; margin-bottom:20px;">
 
 <form id="playerForm">
   <input type="text" name="name" placeholder="InGame Name" required><br><br>
   <input type="number" name="power" placeholder="Power" required><br><br>
+  <input type="text" name="era" placeholder="ERA" required><br><br>
+  <input type="number" name="merit" placeholder="Merit" required><br><br>
 
-<input type="text" name="era" placeholder="ERA" required>
+  <!-- New field -->
+  <textarea name="reason" placeholder="Reason for migration" required></textarea><br><br>
 
   <button type="submit">Apply</button>
 </form>
-
 <script>
 document.getElementById("playerForm").addEventListener("submit", async function(e) {
   e.preventDefault();
@@ -27,9 +32,10 @@ New Submission:
 InGame Name: ${data.get("name")}
 Power: ${data.get("power")}
 ERA: ${data.get("era")}
+Merit: ${data.get("merit")}
   `;
 
-  await fetch("https://discord.com/api/webhooks/1496863641067196456/FN4Os_2HR_nvOijzJGsDa6sINQ96B70fLAcXmxSo8dIIAalCKoBLbjuAN4be8xnjStvy", {
+  await fetch("YOUR_DISCORD_WEBHOOK_URL", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ content: message })

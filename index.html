@@ -27,7 +27,13 @@ document.getElementById("playerForm").addEventListener("submit", async function(
 
   const data = new FormData(this);
 
-  const message = `
+  const message =
+"New Submission:\n" +
+"InGame Name: " + data.get("name") + "\n" +
+"Power: " + data.get("power") + "\n" +
+"ERA: " + data.get("era") + "\n" +
+"Merit: " + data.get("merit") + "\n" +
+"Reason: " + data.get("reason");
 New Submission:
 InGame Name: ${data.get("name")}
 Power: ${data.get("power")}

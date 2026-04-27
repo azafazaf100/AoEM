@@ -1,56 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Submit Player</title>
-</head>
-<body>
-
-<h2>Submit Your Information</h2>
-
-<!-- Image on top -->
-<img src="E42 v3 github.png" alt="Banner" style="display:block; margin-bottom:20px;">
-
-<form id="playerForm">
-  <input type="text" name="name" placeholder="InGame Name" required><br><br>
-  <input type="number" name="power" placeholder="Power" required><br><br>
-  <input type="text" name="era" placeholder="ERA" required><br><br>
-  <input type="number" name="merit" placeholder="Merit" required><br><br>
-
-  <!-- New field -->
-  <textarea name="reason" placeholder="Reason for migration" required></textarea><br><br>
-
-  <button type="submit">Apply</button>
-</form>
 <script>
 document.getElementById("playerForm").addEventListener("submit", async function(e) {
   e.preventDefault();
 
-  const data = new FormData(this);
+  const formData = new FormData(this);
 
-const res = await fetch("YOUR_WEBHOOK_URL", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ content: message })
-});
+  const message =
+    "Name: " + formData.get("name") + "\n" +
+    "Power: " + formData.get("power") + "\n" +
+    "ERA: " + formData.get("era") + "\n" +
+    "Merit: " + formData.get("merit") + "\n" +
+    "Reason: " + formData.get("reason");
 
-if (!res.ok) {
-  const text = await res.text();
-  console.log("Discord error:", text);
-  alert("Failed to send");
-  return;
-}
+  try {
+    const res = await fetch("https://discord.com/api/webhooks/1497176070208749729/jSfib8yu1D_k_C-73kWOP4NmOeA_d0IocqUBA1cTMHbSLBNSOh5zvXglM2PZyjMpE0DA", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content: message })
+    });
 
-alert("Submitted!");
-  
-  await fetch("https://discord.com/api/webhooks/1497176070208749729/jSfib8yu1D_k_C-73kWOP4NmOeA_d0IocqUBA1cTMHbSLBNSOh5zvXglM2PZyjMpE0DA", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ content: message })
-  });
+    if (!res.ok) {
+      const text = await res.text();
+      console.log("Discord error:", text);
+      alert("Failed to send");
+      return;
+    }
 
-  alert("Submitted!");
+    alert("Submitted!");
+    this.reset();
+
+  } catch (err) {
+    console.error(err);
+    alert("Error sending form");
+  }
 });
 </script>
-
-</body>
-</html>
